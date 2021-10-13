@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Recommended order for implementation: -->
+<!-- add rules to styles.css that hide all section tags under main not having a class of 'active' -->
+<!-- scheduler (js file) -->
+<!-- homeView (js file, html below & css) -->
+<!-- calendartView (js file, html below & css) -->
+<!-- appointmentView (js file, html below & css) -->
+
+<head>
+
+  <!-- Go out to https://fonts.google.com/ and follow instructions to use font 'Source Sans Pro'-->
+  <!-- You will need to add your reference to google's font api before your local stylesheet. -->
+  
+  <link rel="stylesheet" href="style.css" />
+
+  <script>
+    var tutorCenterApp;
+  </script>
+
+  <script src="scripts/viewer.js"></script>
+  <script src="scripts/scheduler.js"></script>
+  <script src="scripts/views/calendar.js"></script>
+  <script src="scripts/views/home.js"></script>
+  <script src="scripts/views/appointment.js"></script>
+</head>
+
+<body onload="tutorCenterApp.homeView.load()">
+  <header>
+    <h1>Tutoring Center</h1>
+  </header>
+  <main>
+    <!-- Add css that sets main > section to display none, but main > section.active to display block -->
+    <section id="homeView">
+      <!-- Add container for list of profile cards (to be bound from code) -->
+      <!-- and a template of a profile card (wrapped by a selectable template tag) inside container -->
+      <div id="cardList" class="row">
+          <div id="card" class="column card">
+            <img src="profilePicture.png" width=150px height=150px>
+            <h3 id="tutorName"></h3> <br>
+            <button type="button" id="scheduleButton">View Schedule</button> <br> <br> <br>
+            <span id="tutorSkills"></span>
+          </div>
+      </div>
+    </section>
+    <section id="calendarView">
+      <!-- h2 to be bound from code -->
+      <h2 id="scheduleTutorName">nosr</h2>
+
+      <!-- Table for displaying a tutur's schedule goes here -->
+      
+      <table id="tutorCalendar">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Schedule</th>
+            </tr>
+          </thead>
+          <tbody id = "scheduleList">
+          </tbody>
+          <template>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </template>
+        </table>
+
+      <!-- with a row in the tbody for each day (Monday-Thursday). -->
+      <!-- Make id of second column in each row the day name ("Monday", etc.).  -->
+      <!-- Button to return to list should call app.homeView.load() -->
+      <button onclick="tutorCenterApp.homeView.load()">Back</button>
+      
+    </section>
+    <section id="appointmentView">
+      <!-- Form to collect name (input) and notes (textarea) goes here -->
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br>
+        <label for="notes">Notes:</label>
+        <input type="textarea" id="notes" name="notes"><br>
+      </form>
+      <!-- Cancel button calls app.homeView.load() -->
+      <button onclick="tutorCenterApp.homeView.load()">Cancel</button>
+      <!-- Book button calls app.appointmentView.save() -->
+      <button onclick="tutorCenterApp.appointmentView.save()">Book</button>
+    </section>
+  </main>
+</body>
+</html>
